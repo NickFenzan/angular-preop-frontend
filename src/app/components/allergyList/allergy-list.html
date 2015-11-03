@@ -1,0 +1,17 @@
+<ul ng-show="vm.allergies.length > 0">
+    <li ng-repeat="(key,allergy) in vm.allergies">
+        <span style="text-transform: capitalize">
+            {{ allergy.name}}
+        </span>
+        <button class="btn btn-default btn-xs" ng-click="vm.remove(key)">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </button>
+    </li>
+</ul>
+<div ng-hide="vm.allergies.length > 0">No known allergies</div>
+<!--<form ng-submit="vm.add()">-->
+    <input ng-model="vm.newAllergy" uib-typeahead="allergy as allergy.name for allergy in vm.searchAllergies($viewValue)">
+    <button type="button" class="btn btn-default btn-xs" ng-click="vm.add()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+<!--</form>-->

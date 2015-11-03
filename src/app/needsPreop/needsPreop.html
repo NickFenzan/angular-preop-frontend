@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Appointments That Still Need Preop Sheets</h1>
+    
+    <select class="form-control"
+        ng-options="site.id as site.name for site in needsPreop.sites" 
+        ng-model="needsPreop.activeSite"
+        ng-change="needsPreop.findAppointments()"        
+        >
+    </select>
+    
+    <div class="list-group">
+        <a href="#/create-preop/{{appt.id}}" class="list-group-item" ng-repeat="appt in needsPreop.appointments">
+            <h4>{{appt.start | date:"MMMM d, y 'at' h:mm a"}}</h4>
+            <p>
+                {{appt.patient.preferred_name}} {{appt.patient.last_name}} 
+            </p>
+        </a>
+    </div>
+    
+</div>

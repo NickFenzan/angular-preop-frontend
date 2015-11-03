@@ -1,0 +1,17 @@
+<ul ng-show="vm.medications.length > 0">
+    <li ng-repeat="(key,medication) in vm.medications">
+        <span style="text-transform: capitalize">
+            {{ medication.name}}
+        </span>
+        <button class="btn btn-default btn-xs" ng-click="vm.remove(key)">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </button>
+    </li>
+</ul>
+<div ng-hide="vm.medications.length > 0">No medications listed</div>
+<ng-form>
+    <input ng-model="vm.newMedication" uib-typeahead="medication as medication.name for medication in vm.searchMedications($viewValue)">
+    <button type="button" class="btn btn-default btn-xs" ng-click="vm.add()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+</ng-form>

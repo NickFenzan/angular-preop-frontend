@@ -1,0 +1,136 @@
+<div class="container">
+    <!--<ng-form ng-submit="preop.submit()">-->
+        <h1>New Pre-Procedure Sheet</h1>
+
+        Appointment ID: {{preop.appointment.id}}
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Patient</h4>
+            </div>
+            <div class="panel-body">
+                <dl>
+                    <dt>Name</dt>
+                    <dd>
+                        {{ preop.appointment.patient.preferred_name}} {{ preop.appointment.patient.last_name}} ({{preop.appointment.patient.id}})
+                    </dd>
+                    <dt>Phone Numbers</dt>
+                    <dd>
+                        <ul>
+                            <li ng-show="preop.appointment.patient.home_phone">Home: {{ preop.appointment.patient.home_phone | tel }}</li>
+                            <li ng-show="preop.appointment.patient.work_phone">Work: {{ preop.appointment.patient.work_phone | tel }}</li>
+                            <li ng-show="preop.appointment.patient.cell_phone">Cell: {{ preop.appointment.patient.cell_phone | tel }}</li>
+                        </ul>
+                    </dd>
+                    <dt>Best Number</dt>
+                    <dd>
+                        {{ preop.appointment.patient.best_number}}
+                    </dd>
+                </dl>
+
+
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Appointment</h4>
+            </div>
+            <div class="panel-body">
+                {{preop.appointment.start| date:"MMMM d, y 'at' h:mm a"}} in {{preop.appointment.column.site.city}}
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Procedure</h4>
+            </div>
+            <div class="panel-body">
+                <mv-procedure-list procedures="preop.plan.procedures"></mv-procedure-list>
+                <!--            <ul>
+                                <li ng-repeat="procedure in preop.plan.procedures" style="text-transform: capitalize">
+                                    {{procedure.laterality}} {{procedure.vein | uppercase }} {{procedure.procedure}}
+                                </li>
+                            </ul>-->
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">History</h4>
+            </div>
+            <div class="panel-body">
+                <h5>
+                    From Date of Service: {{preop.historyLetter.encounter.date| date : "shortDate"}}
+                </h5>
+                <button class="btn btn-primary" type="button" ng-click="preop.historyLetterIsCollapsed = !preop.historyLetterIsCollapsed">
+                    Show/Hide Letter
+                </button>
+                <div uib-collapse="preop.historyLetterIsCollapsed">
+                    <div class="well" ng-bind-html="preop.historyLetter.body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Ultrasound</h4>
+            </div>
+            <div class="panel-body">
+                <h5>
+                    From Date of Service: {{preop.ultrasoundLetter.encounter.date| date : "shortDate"}}
+                </h5>
+                <button class="btn btn-primary" type="button" ng-click="preop.ultrasoundLetterIsCollapsed = !preop.ultrasoundLetterIsCollapsed">
+                    Show/Hide Letter
+                </button>
+                <div uib-collapse="preop.ultrasoundLetterIsCollapsed">
+                    <div class="well" ng-bind-html="preop.ultrasoundLetter.body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Allergies</h4>
+            </div>
+            <div class="panel-body">
+                <mv-allergy-list allergies="preop.history.allergies"></mv-allergy-list>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Premedication</h4>
+            </div>
+            <div class="panel-body">
+                <mv-medication-list medications="preop.history.premedications"></mv-medication-list>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Medical Clearance</h4>
+            </div>
+            <div class="panel-body">
+                <div ng-show="preop.plan.clearance_required">
+                    Clearance required
+                </div>
+                <div ng-hide="preop.plan.clearance_required">
+                    Clearance not required
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Notes</h4>
+            </div>
+            <div class="panel-body">
+                <textarea class="form-control" ng-model="preop.notes"></textarea>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" ng-click="preop.submit()">Submit</button>
+    <!--</ng-form>-->
+</div>
